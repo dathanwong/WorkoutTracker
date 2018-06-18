@@ -6,27 +6,13 @@
 
     <StackLayout>
         <!-- Place new controls here -->
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button Text="Back" Grid.Row="0" Grid.Column="0"/>
-            <Button Text="Chest" Grid.Row="0" Grid.Column="1"/>
-            <Button Text="Tri" Grid.Row="0" Grid.Column="2"/>
-            <Button Text="Shoulder" Grid.Row="0" Grid.Column="3"/>
-            <Button Text="Bi" Grid.Row="1" Grid.Column="0"/>
-            <Button Text="Legs" Grid.Row="1" Grid.Column="1"/>
-            <Button Text="Abs" Grid.Row="1" Grid.Column="2"/>
-            <Button Text="Other" Grid.Row="1" Grid.Column="3"/>
-
-        </Grid>
+        <ListView x:Name="Exercises">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     	<Label Text="Welcome to Xamarin.Forms!" 
            HorizontalOptions="Center"
            VerticalOptions="CenterAndExpand" />
