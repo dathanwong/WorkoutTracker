@@ -12,8 +12,7 @@ namespace WorkoutTracker
 	public partial class MainPage : ContentPage
 	{
 
-        List<Exercise> workout = new List<Exercise>();
-        ExerciseList exercises;
+        ObservableCollection<Exercise> workout = new ObservableCollection<Exercise>();
 
         public MainPage()
 		{
@@ -22,17 +21,49 @@ namespace WorkoutTracker
             workout.Add(new Exercise { Name = "lat pull", Reps = 50, Weight = 100, Index = 1 });
             workout.Add(new Exercise { Name = "bench press", Reps = 213, Weight = 100, Index = 2 });
             workout.Add(new Exercise { Name = "shoulder press", Reps = 4, Weight = 100, Index = 3 });
-            exercises = new ExerciseList(workout);
-            Exercises.ItemsSource = exercises.Exercises;
+            Exercises.ItemsSource = workout;
 		}
 
         private void BtnMinusWeight_Clicked(object sender, EventArgs e)
         {
-            int selectedItem = (int) (sender as Button).CommandParameter;
-            Exercise exercise = exercises.Exercises[selectedItem];
-            exercises.Exercises[selectedItem].Weight = exercise.Weight - 5;
+            var b = (Button)sender;
+            Exercise t = (Exercise)b.CommandParameter;
+            workout[t.Index].Weight = t.Weight - 5;
+            refreshListView();
         }
+
+        private void btnPlusWeight_Clicked(object sender, EventArgs e)
+        {
+            var b = (Button)sender;
+            Exercise t = (Exercise)b.CommandParameter;
+            workout[t.Index].Weight = t.Weight + 5;
+            refreshListView();
+        }
+
+        private void btnMinusReps_Clicked(object sender, EventArgs e)
+        {
+            var b = (Button)sender;
+            Exercise t = (Exercise)b.CommandParameter;
+            workout[t.Index].Reps = t.Reps - 1;
+            refreshListView();
+        }
+
+        private void btnPlusReps_Clicked(object sender, EventArgs e)
+        {
+            var b = (Button)sender;
+            Exercise t = (Exercise)b.CommandParameter;
+            workout[t.Index].Reps = t.Reps + 1;
+            refreshListView();
+        }
+
+        private void refreshListView()
+        {
+            Exercises.ItemsSource = null;
+            Exercises.ItemsSource = workout;
+        }
+
     }
+
 
     public class Exercise
     {
@@ -42,31 +73,4 @@ namespace WorkoutTracker
         public int Weight { get; set; }
     }
 
-    public class ExerciseList : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-        public ObservableCollection<Exercise> _exercises;
-
-        public ObservableCollection<Exercise> Exercises
-        {
-            get { return _exercises; }
-            set { _exercises = value; OnPropertyChanged("Exercises"); }
-        }
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged == null)
-                return;
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public ExerciseList(List<Exercise> exerciseList)
-        {
-            Exercises = new ObservableCollection<Exercise>();
-            foreach (Exercise ex in exerciseList)
-            {
-                Exercises.Add(ex);
-            }
-        }
-    }
 }
