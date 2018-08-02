@@ -32,6 +32,9 @@
       <DependentUpon>ChestPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)DataAccess.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Lift.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IDatabaseConnection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LegPage.xaml.cs">
       <DependentUpon>LegPage.xaml</DependentUpon>
       <SubType>Code</SubType>
