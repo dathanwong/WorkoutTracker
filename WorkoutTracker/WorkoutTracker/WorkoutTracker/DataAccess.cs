@@ -1,44 +1,93 @@
 ﻿using System;
 using SQLite;
-using System.Linq;
-using Xamarin.Forms;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace WorkoutTracker
 {
     class DataAccess
     {
-        private SQLiteConnection database;
-        private static object collisionLock = new object();
+        readonly SQLiteAsyncConnection database;
 
-        public ObservableCollection<Lift> Lifts { get; set; }
-
-        public DataAccess()
+        public DataAccess(string dbPath)
         {
-            database = DependencyService.Get<IDatabaseConnection>().DbConnection();
-            database.CreateTable<Lift>();
-            this.Lifts = new ObservableCollection<Lift>(database.Table<Lift>());
-            //if table is empty, initialize collection
-            if (!database.Table<Lift>().Any())
+            //Create new SQLite table
+            database = new SQLiteAsyncConnection(dbPath);
+            database.CreateTableAsync<Lift>().Wait();
+        }
+
+        //Get all lifts
+        public Task<List<Lift>> GetLifts()
+        {
+            return database.Table<Lift>().ToListAsync();
+        }
+
+        //Add new lift
+        public Task<int> AddLiftAsync(Lift item)
+        {
+            if (item.Id != 0)
             {
-                AddNewLift();
+                return database.UpdateAsync(item);
             }
-        }
-
-        public void AddNewLift()
-        {
-            this.Lifts.Add(new Lift { ExerciseName = "Row", Reps = 10, Weight = 120 , Muscle = "Back"});
-        }
-
-        public IEnumerable<Lift> GetFilteredLifts()
-        {
-            lock (collisionLock)
+            else
             {
-                return database.Query<Lift>("SELECT * FROM Item WHERE Muscel = 'Back'").AsEnumerable();
+                return database.InsertAsync(item);
             }
+
         }
 
+        //Delete lift
+        public Task<int> DeleteItemAsync(Lift item)
+        {
+            return database.DeleteAsync(item);
+        }
+
+        public async void DeleteAllItems()
+        {
+            List<Lift> all = await GetLifts();
+            foreach (Lift lift in all)
+            {
+                await DeleteItemAsync(lift);
+            }
+
+        }
+
+        //Add 5 pounds to weight
+        public int AddWeight(Lift lift)
+        {
+            int newWeight = lift.Weight + 5;
+            database.QueryAsync<Lift>("UPDATE LIFTS SET WEIGHT =" + newWeight.ToString() + " WHERE ID = " + lift.Id);
+            return newWeight;
+        }
+
+        //Subtract 5 pounds to weight
+        public int SubWeight(Lift lift)
+        {
+            int newWeight = lift.Weight - 5;
+            database.QueryAsync<Lift>("UPDATE LIFTS SET WEIGHT =" + newWeight.ToString() + " WHERE ID = " + lift.Id);
+            return newWeight;
+        }
+
+        //Add one to reps
+        public int AddRep(Lift lift)
+        {
+            int newReps = lift.Reps + 1;
+            database.QueryAsync<Lift>("UPDATE LIFTS SET REPS =" + newReps.ToString() + " WHERE ID = " + lift.Id);
+            return newReps;
+        }
+
+        //Subtract one from reps
+        public int SubRep(Lift lift)
+        {
+            int newReps = lift.Reps - 1;
+            database.QueryAsync<Lift>("UPDATE LIFTS SET REPS =" + newReps.ToString() + " WHERE ID = " + lift.Id);
+            return newReps;
+        }
+
+        //Get Filtered Lifts
+        public Task<List<Lift>> GetFilteredLifts(string muscle)
+        {
+            return database.QueryAsync<Lift>("SELECT * FROM LIFTS WHERE [MUSCLE] = '" + muscle + "'");
+        }
     }
 }

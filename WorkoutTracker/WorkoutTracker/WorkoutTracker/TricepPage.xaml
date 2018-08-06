@@ -3,10 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WorkoutTracker.TricepPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ListView x:Name="Exercises">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label x:Name="lblExerciseName" Text="{Binding ExerciseName}" VerticalTextAlignment="Center" WidthRequest="70"/>
+                            <Button x:Name="btnMinusWeight" Text="-" WidthRequest="30" Clicked="BtnMinusWeight_Clicked" CommandParameter="{Binding .}"/>
+                            <Label x:Name="lblWeight" Text="{Binding Weight}" VerticalTextAlignment="Center" WidthRequest="30"/>
+                            <Button x:Name="btnPlusWeight" Text="+" WidthRequest="30" Clicked="btnPlusWeight_Clicked" CommandParameter="{Binding .}"/>
+                            <Button x:Name="btnMinusReps" Text="-" WidthRequest="30" Clicked="btnMinusReps_Clicked" CommandParameter="{Binding .}"/>
+                            <Label x:Name="lblReps" Text="{Binding Reps}" VerticalTextAlignment="Center" WidthRequest="30"/>
+                            <Button x:Name="btnPlusReps" Text="+" WidthRequest="30" Clicked="btnPlusReps_Clicked" CommandParameter="{Binding .}"/>
+                            <Button x:Name="btnSave" Text="Save" WidthRequest="65"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentPage.Content>
 </ContentPage>

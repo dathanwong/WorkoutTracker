@@ -7,68 +7,81 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.IO;
 
 namespace WorkoutTracker
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class BackPage : ContentPage
 	{
-        ObservableCollection<Exercise> workout = new ObservableCollection<Exercise>();
+        DataAccess dataAccess;
+        String exerciseName = "back";
 
-        public BackPage ()
-		{
+        public BackPage()
+        {
             InitializeComponent();
-            workout.Add(new Exercise { Name = "bicep curl", Reps = 5, Weight = 100, Index = 0 });
-            workout.Add(new Exercise { Name = "lat pull", Reps = 50, Weight = 100, Index = 1 });
-            workout.Add(new Exercise { Name = "bench press", Reps = 213, Weight = 100, Index = 2 });
-            workout.Add(new Exercise { Name = "shoulder press", Reps = 4, Weight = 100, Index = 3 });
-            Exercises.ItemsSource = workout;
+            //Establish SQLite Connection
+            dataAccess = new DataAccess(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Lifts.db3"));
         }
 
-        private void BtnMinusWeight_Clicked(object sender, EventArgs e)
+        protected override async void OnAppearing()
+        {
+            List<Lift> lifts = new List<Lift>();
+            lifts = await dataAccess.GetFilteredLifts(exerciseName);
+            //Initialize list of lifts if none exist
+            if (lifts.Count == 0)
+            {
+                List<Lift> backLifts = new List<Lift>();
+                backLifts.Add(new Lift { ExerciseName = "Lat Pull Down", Muscle = exerciseName, Reps = 0, Weight = 0 });
+                backLifts.Add(new Lift { ExerciseName = "Dumbbell Row", Muscle = exerciseName, Reps = 0, Weight = 0 });
+                backLifts.Add(new Lift { ExerciseName = "Seated Row", Muscle = exerciseName, Reps = 0, Weight = 0 });
+                backLifts.Add(new Lift { ExerciseName = "Deadlift ", Muscle = exerciseName, Reps = 0, Weight = 0 });
+                backLifts.Add(new Lift { ExerciseName = "Bentover Barbell Row", Muscle = exerciseName, Reps = 0, Weight = 0 });
+                backLifts.Add(new Lift { ExerciseName = "Reverse Fly", Muscle = exerciseName, Reps = 0, Weight = 0 });
+                backLifts.Add(new Lift { ExerciseName = "Pull Up", Muscle = exerciseName, Reps = 0, Weight = 0 });
+                backLifts.Add(new Lift { ExerciseName = "Angle Pull Down", Muscle = exerciseName, Reps = 0, Weight = 0 });
+                foreach (Lift lift in backLifts)
+                {
+                    await dataAccess.AddLiftAsync(lift);
+                }
+            }
+            Exercises.ItemsSource = lifts;
+        }
+        
+        //Subtract weight button
+        private async void BtnMinusWeight_Clicked(object sender, EventArgs e)
         {
             var b = (Button)sender;
-            Exercise t = (Exercise)b.CommandParameter;
-            workout[t.Index].Weight = t.Weight - 5;
-            refreshListView();
+            Lift lift = (Lift)b.CommandParameter;
+            dataAccess.SubWeight(lift);
+            Exercises.ItemsSource = await dataAccess.GetFilteredLifts(exerciseName);
         }
 
-        private void btnPlusWeight_Clicked(object sender, EventArgs e)
+        //Add weight button
+        private async void btnPlusWeight_Clicked(object sender, EventArgs e)
         {
             var b = (Button)sender;
-            Exercise t = (Exercise)b.CommandParameter;
-            workout[t.Index].Weight = t.Weight + 5;
-            refreshListView();
+            Lift lift = (Lift)b.CommandParameter;
+            dataAccess.AddWeight(lift);
+            Exercises.ItemsSource = await dataAccess.GetFilteredLifts(exerciseName);
         }
 
-        private void btnMinusReps_Clicked(object sender, EventArgs e)
+        //Subtract reps button
+        private async void btnMinusReps_Clicked(object sender, EventArgs e)
         {
             var b = (Button)sender;
-            Exercise t = (Exercise)b.CommandParameter;
-            workout[t.Index].Reps = t.Reps - 1;
-            refreshListView();
+            Lift lift = (Lift)b.CommandParameter;
+            dataAccess.SubRep(lift);
+            Exercises.ItemsSource = await dataAccess.GetFilteredLifts(exerciseName);
         }
 
-        private void btnPlusReps_Clicked(object sender, EventArgs e)
+        //Add reps button
+        private async void btnPlusReps_Clicked(object sender, EventArgs e)
         {
             var b = (Button)sender;
-            Exercise t = (Exercise)b.CommandParameter;
-            workout[t.Index].Reps = t.Reps + 1;
-            refreshListView();
-        }
-
-        private void refreshListView()
-        {
-            Exercises.ItemsSource = null;
-            Exercises.ItemsSource = workout;
-        }
-
-        public class Exercise
-        {
-            public int Index { get; set; }
-            public string Name { get; set; }
-            public int Reps { get; set; }
-            public int Weight { get; set; }
+            Lift lift = (Lift)b.CommandParameter;
+            dataAccess.AddRep(lift);
+            Exercises.ItemsSource = await dataAccess.GetFilteredLifts(exerciseName);
         }
     }
 
