@@ -11,7 +11,7 @@ namespace WorkoutTracker
     public partial class LegPage : ContentPage
     {
         DataAccess dataAccess;
-        String exerciseName = "chest";
+        String exerciseName = "leg";
 
         public LegPage()
         {
