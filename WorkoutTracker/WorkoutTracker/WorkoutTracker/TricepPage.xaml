@@ -11,7 +11,7 @@
                             <Label x:Name="lblExerciseName" Text="{Binding ExerciseName}" VerticalTextAlignment="Center" WidthRequest="120"/>
                             <Button x:Name="btnMinusWeight" Text="-" WidthRequest="30" Clicked="BtnMinusWeight_Clicked" CommandParameter="{Binding .}"/>
                             <Label x:Name="lblWeight" Text="{Binding Weight}" VerticalTextAlignment="Center" WidthRequest="30"/>
-                            <Button x:Name="btnPlusWeight" Text="+" WidthRequest="30" Clicked="btnPlusWeight_Clicked" CommandParameter="{Binding .}"/>
+                            <Button x:Name="btnPlusWeight" Text="+" WidthRequest="30" Clicked="btnPlusWeight_Clicked"  CommandParameter="{Binding .}"/>
                             <Button x:Name="btnMinusReps" Text="-" WidthRequest="30" Clicked="btnMinusReps_Clicked" CommandParameter="{Binding .}"/>
                             <Label x:Name="lblReps" Text="{Binding Reps}" VerticalTextAlignment="Center" WidthRequest="30"/>
                             <Button x:Name="btnPlusReps" Text="+" WidthRequest="30" Clicked="btnPlusReps_Clicked" CommandParameter="{Binding .}"/>
