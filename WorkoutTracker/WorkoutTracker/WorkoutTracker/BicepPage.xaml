@@ -4,6 +4,13 @@
              x:Class="WorkoutTracker.BicepPage">
     <ContentPage.Content>
         <ListView x:Name="Exercises">
+            <ListView.Footer>
+                <StackLayout Orientation="Horizontal">
+                    <Entry x:Name="entryAddExercise" Placeholder="Name of exercise"/>
+                    <Button x:Name="btnAddLift" Text="Add Exercise" Clicked="btnAddLift_Clicked" WidthRequest="120"/>
+                    <Button x:Name="btnDeleteLift" Text="Delete" Clicked="btnDeleteLift_Clicked" CommandParameter="{Binding .}"/>
+                </StackLayout>
+            </ListView.Footer>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

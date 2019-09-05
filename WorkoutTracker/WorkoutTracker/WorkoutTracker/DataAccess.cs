@@ -72,6 +72,7 @@ namespace WorkoutTracker
         public int SubWeight(Lift lift)
         {
             int newWeight = lift.Weight - 5;
+            if (newWeight < 0) newWeight = 0;
             database.QueryAsync<Lift>("UPDATE LIFTS SET WEIGHT =" + newWeight.ToString() + " WHERE ID = " + lift.Id);
             return newWeight;
         }
@@ -88,6 +89,7 @@ namespace WorkoutTracker
         public int SubRep(Lift lift)
         {
             int newReps = lift.Reps - 1;
+            if (newReps < 0) newReps = 0;
             database.QueryAsync<Lift>("UPDATE LIFTS SET REPS =" + newReps.ToString() + " WHERE ID = " + lift.Id);
             return newReps;
         }

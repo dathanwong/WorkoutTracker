@@ -75,5 +75,24 @@ namespace WorkoutTracker
             dataAccess.AddRep(lift);
             Exercises.ItemsSource = await dataAccess.GetFilteredLifts(exerciseName);
         }
+
+        //Add Lift button
+        private async void btnAddLift_Clicked(object sender, EventArgs e)
+        {
+            var b = (Button)sender;
+            Lift lift = new Lift { ExerciseName = entryAddExercise.Text, Muscle = exerciseName, Reps = 0, Weight = 0 };
+            entryAddExercise.Text = "";
+            await dataAccess.AddLiftAsync(lift);
+            Exercises.ItemsSource = await dataAccess.GetFilteredLifts(exerciseName);
+        }
+
+        //Delete Lift button
+        private async void btnDeleteLift_Clicked(object sender, EventArgs e)
+        {
+            var b = (Button)sender;
+            Lift lift = (Lift)Exercises.SelectedItem;
+            await dataAccess.DeleteItemAsync(lift);
+            Exercises.ItemsSource = await dataAccess.GetFilteredLifts(exerciseName);
+        }
     }
 }
