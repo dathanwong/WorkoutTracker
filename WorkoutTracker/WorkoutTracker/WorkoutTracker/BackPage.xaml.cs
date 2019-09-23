@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.IO;
+using System.Diagnostics;
 
 namespace WorkoutTracker
 {
@@ -99,8 +100,13 @@ namespace WorkoutTracker
         {
             var b = (Button)sender;
             Lift lift = (Lift)Exercises.SelectedItem;
-            await dataAccess.DeleteItemAsync(lift);
-            Exercises.ItemsSource = await dataAccess.GetFilteredLifts(exerciseName);
+            string action = await DisplayActionSheet("Exercise will be permanently deleted", "Cancel", "Delete");
+            Debug.WriteLine("Action: " + action);
+            if (action.Equals("Delete"))
+            {
+                await dataAccess.DeleteItemAsync(lift);
+                Exercises.ItemsSource = await dataAccess.GetFilteredLifts(exerciseName);
+            }
         }
     }
 

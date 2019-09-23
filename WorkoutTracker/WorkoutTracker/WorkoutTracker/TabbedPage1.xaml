@@ -7,7 +7,7 @@
     <TabbedPage.Children>
         <WorkoutTracker:BackPage Icon="Back_.png"/>
         <WorkoutTracker:ChestPage Icon="Chest_.png"/>
-        <WorkoutTracker:LegPage Icon="abs.png"/>
+        <WorkoutTracker:LegPage Icon="legs.png"/> 
         <WorkoutTracker:BicepPage Icon="Biceps_.png"/>
         <WorkoutTracker:ShoulderPage Icon="Shoulders_.png"/>
         <WorkoutTracker:TricepPage Icon="Triceps_.png"/>

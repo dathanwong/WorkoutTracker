@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 
 using Xamarin.Forms;
@@ -91,8 +92,13 @@ namespace WorkoutTracker
         {
             var b = (Button)sender;
             Lift lift = (Lift)Exercises.SelectedItem;
-            await dataAccess.DeleteItemAsync(lift);
-            Exercises.ItemsSource = await dataAccess.GetFilteredLifts(exerciseName);
+            string action = await DisplayActionSheet("Exercise will be permanently deleted", "Cancel", "Delete");
+            Debug.WriteLine("Action: " + action);
+            if (action.Equals("Delete"))
+            {
+                await dataAccess.DeleteItemAsync(lift);
+                Exercises.ItemsSource = await dataAccess.GetFilteredLifts(exerciseName);
+            }
         }
     }
 }
