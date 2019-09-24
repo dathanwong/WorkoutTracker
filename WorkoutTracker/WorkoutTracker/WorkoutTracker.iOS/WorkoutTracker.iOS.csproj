@@ -154,31 +154,31 @@
     <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\back.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\bicep.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\body.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\chest.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\legs.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\shoulders.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\tricep.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\abs.png" />
+    <BundleResource Include="Resources\Abs.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\arm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Bicep.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Chest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Front.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Legs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Shoulder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricep.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\WorkoutTracker\WorkoutTracker.projitems" Label="Shared" />

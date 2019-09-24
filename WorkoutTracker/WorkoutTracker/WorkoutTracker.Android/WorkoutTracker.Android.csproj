@@ -99,31 +99,34 @@
     <Folder Include="Resources\drawable-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Abs.png" />
+  </ItemGroup>
+  <ItemGroup>
     <AndroidResource Include="Resources\drawable\arm.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\back.png" />
+    <AndroidResource Include="Resources\drawable\Back.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\bicep.png" />
+    <AndroidResource Include="Resources\drawable\Bicep.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\body.png" />
+    <AndroidResource Include="Resources\drawable\Chest.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\chest.png" />
+    <AndroidResource Include="Resources\drawable\Front.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\legs.png" />
+    <AndroidResource Include="Resources\drawable\Legs.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\shoulders.png" />
+    <AndroidResource Include="Resources\drawable\Shoulder.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tricep.png" />
+    <AndroidResource Include="Resources\drawable\Tricep.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\abs.png" />
+    <AndroidResource Include="Resources\drawable\Abs1.png" />
   </ItemGroup>
   <Import Project="..\WorkoutTracker\WorkoutTracker.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
