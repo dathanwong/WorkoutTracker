@@ -5,12 +5,12 @@
             x:Class="WorkoutTracker.TabbedPage1">
   <!--Pages can be added as references or inline-->
     <TabbedPage.Children>
-        <WorkoutTracker:BackPage Icon="Back_.png"/>
-        <WorkoutTracker:ChestPage Icon="Chest_.png"/>
-        <WorkoutTracker:LegPage Icon="legs.png"/> 
-        <WorkoutTracker:BicepPage Icon="Biceps_.png"/>
-        <WorkoutTracker:ShoulderPage Icon="Shoulders_.png"/>
-        <WorkoutTracker:TricepPage Icon="Triceps_.png"/>
-        <WorkoutTracker:AbPage Icon="Abs_.png"/>
+        <WorkoutTracker:BackPage Title="BCK"/>
+        <WorkoutTracker:ChestPage Title="CHT"/>
+        <WorkoutTracker:LegPage Title="LEG"/>
+        <WorkoutTracker:BicepPage Title="BI"/>
+        <WorkoutTracker:ShoulderPage Title="SHD"/>
+        <WorkoutTracker:TricepPage Title="TRI"/>
+        <WorkoutTracker:AbPage Title="ABS"/>
     </TabbedPage.Children>
 </TabbedPage>
