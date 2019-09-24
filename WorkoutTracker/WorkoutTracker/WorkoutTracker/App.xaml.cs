@@ -11,7 +11,6 @@ namespace WorkoutTracker
 		{
 			InitializeComponent();
 
-            //MainPage = new Screenshot1();
 			MainPage = new TabbedPage1();
 		}
 
