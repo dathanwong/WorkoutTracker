@@ -5,6 +5,7 @@
             x:Class="WorkoutTracker.TabbedPage1">
   <!--Pages can be added as references or inline-->
     <TabbedPage.Children>
+<<<<<<< HEAD
         <WorkoutTracker:BackPage Icon="Back_.png"/>
         <WorkoutTracker:ChestPage Icon="Chest_.png"/>
         <WorkoutTracker:LegPage Icon="legs.png"/> 
@@ -12,5 +13,14 @@
         <WorkoutTracker:ShoulderPage Icon="Shoulders_.png"/>
         <WorkoutTracker:TricepPage Icon="Triceps_.png"/>
         <WorkoutTracker:AbPage Icon="Abs_.png"/>
+=======
+        <WorkoutTracker:BackPage Title="Back"/>
+        <WorkoutTracker:ChestPage Title="Chest"/>
+        <WorkoutTracker:LegPage Title="Leg"/>
+        <WorkoutTracker:BicepPage Title="Bicep"/>
+        <WorkoutTracker:ShoulderPage Title="Shoulder"/>
+        <WorkoutTracker:TricepPage Title="Tricep"/>
+        <WorkoutTracker:AbPage Title="Ab"/>
+>>>>>>> parent of 1fd3beb... Added images to tabs
     </TabbedPage.Children>
 </TabbedPage>

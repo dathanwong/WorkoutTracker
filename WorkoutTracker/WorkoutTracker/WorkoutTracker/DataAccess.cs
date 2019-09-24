@@ -52,7 +52,7 @@ namespace WorkoutTracker
 
         }
 
-        //Add weight
+        //Add 5 pounds to weight
         public int AddWeight(Lift lift)
         {
             int newWeight = lift.Weight + 5;
@@ -60,15 +60,7 @@ namespace WorkoutTracker
             return newWeight;
         }
 
-        //Add weight long press
-        public int AddWeightLongPress(Lift lift)
-        {
-            int newWeight = lift.Weight + 10;
-            database.QueryAsync<Lift>("UPDATE LIFTS SET WEIGHT =" + newWeight.ToString() + " WHERE ID = " + lift.Id);
-            return newWeight;
-        }
-
-        //Subtract weight
+        //Subtract 5 pounds to weight
         public int SubWeight(Lift lift)
         {
             int newWeight = lift.Weight - 5;

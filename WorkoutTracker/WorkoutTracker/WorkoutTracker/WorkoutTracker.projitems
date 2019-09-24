@@ -107,6 +107,7 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
+<<<<<<< HEAD
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Images\" />
   </ItemGroup>
@@ -116,4 +117,6 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
+=======
+>>>>>>> parent of 1fd3beb... Added images to tabs
 </Project>
