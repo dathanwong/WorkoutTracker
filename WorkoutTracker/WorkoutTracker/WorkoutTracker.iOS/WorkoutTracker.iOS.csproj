@@ -180,9 +180,6 @@
   <ItemGroup>
     <BundleResource Include="Resources\arm.png" />
   </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\absNew.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\WorkoutTracker\WorkoutTracker.projitems" Label="Shared" />
 </Project>
