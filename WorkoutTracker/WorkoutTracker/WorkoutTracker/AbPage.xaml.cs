@@ -85,10 +85,17 @@ namespace WorkoutTracker
         private async void btnAddLift_Clicked(object sender, EventArgs e)
         {
             var b = (Button)sender;
-            Lift lift = new Lift { ExerciseName = entryAddExercise.Text, Muscle = exerciseName, Reps = 0, Weight = 0 };
-            entryAddExercise.Text = "";
-            await dataAccess.AddLiftAsync(lift);
-            Exercises.ItemsSource = await dataAccess.GetFilteredLifts(exerciseName);
+            if (entryAddExercise.Text == null)
+            {
+                return;
+            }
+            else
+            {
+                Lift lift = new Lift { ExerciseName = entryAddExercise.Text, Muscle = exerciseName, Reps = 0, Weight = 0 };
+                entryAddExercise.Text = "";
+                await dataAccess.AddLiftAsync(lift);
+                Exercises.ItemsSource = await dataAccess.GetFilteredLifts(exerciseName);
+            }
         }
 
         //Delete Lift button
@@ -96,12 +103,15 @@ namespace WorkoutTracker
         {
             var b = (Button)sender;
             Lift lift = (Lift)Exercises.SelectedItem;
-            string action = await DisplayActionSheet("Exercise will be permanently deleted", "Cancel", "Delete");
-            Debug.WriteLine("Action: " + action);
-            if (action.Equals("Delete"))
+            if (lift != null)
             {
-                await dataAccess.DeleteItemAsync(lift);
-                Exercises.ItemsSource = await dataAccess.GetFilteredLifts(exerciseName);
+                string action = await DisplayActionSheet("Exercise will be permanently deleted", "Cancel", "Delete");
+                Debug.WriteLine("Action: " + action);
+                if (action.Equals("Delete"))
+                {
+                    await dataAccess.DeleteItemAsync(lift);
+                    Exercises.ItemsSource = await dataAccess.GetFilteredLifts(exerciseName);
+                }
             }
         }
     }
